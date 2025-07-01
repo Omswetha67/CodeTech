@@ -1,0 +1,37 @@
+/* Task 1: File Handling Utility
+ Description:
+ Create a Java program to read, write, and modify text files.
+ How it Works:
+ This program creates a text file, writes data into it, reads the content, and then appends new lines to the
+ existing content.
+ Expected Output:
+ Hello, CODTECH!
+ Appended line*/
+
+
+import java.io.*;
+ public class FileHandler {
+    public static void main(String[] args) {
+        String filePath = "example.txt";
+        
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            writer.write("Hello, CODTECH!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+            writer.newLine();
+            writer.write("Appended line.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+ }
