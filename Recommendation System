@@ -1,0 +1,29 @@
+/* Description:
+ Build a simple recommendation engine using similarity logic.
+ How it Works:
+ This program takes a map of user preferences and recommends items to a user based on what others like
+ but the target user hasn't seen.
+ Expected Output:
+ Recommendations for User1: [BookC*/
+
+import java.util.*;
+ public class RecommendationSystem {
+    public static void main(String[] args) {
+        Map<String, List<String>> userPreferences = new HashMap<>();
+        userPreferences.put("User1", Arrays.asList("BookA", "BookB"));
+        userPreferences.put("User2", Arrays.asList("BookB", "BookC"));
+        userPreferences.put("User3", Arrays.asList("BookA", "BookC"));
+        String targetUser = "User1";
+        Set<String> recommended = new HashSet<>();
+        for (Map.Entry<String, List<String>> entry : userPreferences.entrySet()) {
+            if (!entry.getKey().equals(targetUser)) {
+                for (String item : entry.getValue()) {
+                    if (!userPreferences.get(targetUser).contains(item)) {
+                        recommended.add(item);
+                    }
+                }
+            }
+        }
+        System.out.println("Recommendations for " + targetUser + ": " + recommended);
+    }
+ }
